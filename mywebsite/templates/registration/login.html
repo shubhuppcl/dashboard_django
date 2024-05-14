@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in Page</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css'%}">
+</head>
+<body>
+
+    <!--div class="wrapper">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button id="login-button" type="submit">Login</button>
+        </form>
+    </div-->
+    <div class="wrapper {% if login_failed %}form-success{% endif %}">
+      <div class="container">
+        <h1>Welcome</h1>
+        
+        <form class="form" method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <input type="text" name="username" placeholder="Username">
+          <input type="password" name="password" placeholder="Password">
+          <button type="submit" id="login-button">Login</button>
+        </form>
+      </div>
+      
+      <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <!-- Include jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Your JavaScript code -->
+    
+  <!--script>
+    $(document).ready(function(){
+      
+      $("#login-button").click(function(event){
+		 event.preventDefault();
+	 
+	 $('form').fadeOut(500);
+	 $('.wrapper').addClass('form-success');
+});
+    });
+</script-->
+<script>
+  $(document).ready(function(){
+      // Check if login failed condition exists in the template
+      var loginFailed = {% if login_failed %} true {% else %} false {% endif %};
+      
+      // Check if login failed, and if so, trigger the form success animation
+      if (loginFailed) {
+          // Add a delay before hiding the form
+          setTimeout(function() {
+              // Fade out the form over 500 milliseconds
+              $('.wrapper').fadeOut(500);
+              // Add the 'form-success' class to the wrapper
+              $('.wrapper').addClass('form-success');
+          }, 200); // Adjust the delay time in milliseconds (200 milliseconds in this example)
+      }
+  });
+</script>
+
+
+  
+</body>
+</html>
+
+  
